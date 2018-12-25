@@ -7,5 +7,9 @@ dubbo:
   registry:
     address:  127.0.0.1:2181 #地址
     protocol: zookeeper #注册中心
+    check: false #启动时是否检查注册中心有
   # monitor: #监控中心
     # address: registry
+  consumer:
+    check: false #当前所有的服务启动时都不检查(如果是true的话启动的时候会检查每一个是否在zk中存在，不存在则报错)
+    timeout: 1000 #客户端调用服务端的超时配置(单位/毫秒)

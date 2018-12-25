@@ -6,6 +6,7 @@ dubbo:
   registry:
     address: 127.0.0.1:2181 #注册中心地址
     protocol: zookeeper #注册中心
+    # check: true #检查
   protocol:
     name: dubbo #协议名称
     port: 20881 #协议端口号

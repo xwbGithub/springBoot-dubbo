@@ -10,10 +10,13 @@ import com.atguigu.gmail.service.UserService;
 
 @Service
 public class UserServiceImpl implements OrderService {
-
-    @Reference //在zookeeper中找服务提供者
+    //@Reference注解的作用是在zookeeper中找服务提供者
+    //@Reference(check = false)启动时是否检查该服务在zookeeper中存在,默认是true。
+    //@Reference(timeout = 3000)
+    @Reference
     private UserService userService;
 
+    //@Reference(timeout = 2000)
     public List<UserAddress> initOrder(String userId) {
         System.out.println("用户id" + userId);
         return userService.getUserAddressList(userId);
