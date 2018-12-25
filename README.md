@@ -83,7 +83,7 @@ java -Ddubbo.consumer.check=false
 java -Ddubbo.registry.check=false
 ```
 
-#【配置覆盖关系】 #
+###【配置覆盖关系】###
 
 以 timeout 为例，显示了配置的查找顺序，其它 retries, loadbalance, actives 等类似：
 
