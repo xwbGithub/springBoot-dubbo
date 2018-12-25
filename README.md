@@ -90,7 +90,7 @@ java -Ddubbo.registry.check=false
 其中，服务提供方配置，通过 URL 经由注册中心传递给消费方。<br>
 <div>
     <p align="center">
-        <img src="http://dubbo.apache.org/docs/zh-cn/user/sources/images/dubbo-config-override.jpg" width="258" height="258"/>
+        <img src="http://dubbo.apache.org/docs/zh-cn/user/sources/images/dubbo-config-override.jpg" width="90%" height="60%"/>
         <br>
 </div><br>
 
