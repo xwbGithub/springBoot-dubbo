@@ -1,0 +1,11 @@
+server:
+  port: 8081
+dubbo:
+  application:
+    name: order-service-consumer #服务名称
+    qos-port: 33333 # telnet端口与dubbo协议的端口是不同的端口，默认为22222
+  registry:
+    address:  127.0.0.1:2181 #地址
+    protocol: zookeeper #注册中心
+  # monitor: #监控中心
+    # address: registry

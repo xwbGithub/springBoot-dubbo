@@ -8,6 +8,6 @@ dubbo:
     protocol: zookeeper #注册中心
   protocol:
     name: dubbo #协议名称
-    port: 20880 #协议端口号
+    port: 20881 #协议端口号
   # monitor:
     # protocol: registry #监控中心
