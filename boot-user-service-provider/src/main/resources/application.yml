@@ -1,0 +1,13 @@
+server:
+  port: 8080
+dubbo:
+  application:
+    name: user-service-provider #服务名
+  registry:
+    address: 127.0.0.1:2181 #注册中心地址
+    protocol: zookeeper #注册中心
+  protocol:
+    name: dubbo #协议名称
+    port: 20880 #协议端口号
+  # monitor:
+    # protocol: registry #监控中心
