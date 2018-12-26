@@ -197,12 +197,11 @@ dubbo:
 ```xml    
    dubbo.scan.base-packages=com.atguigu.gmail.service.impl #包扫描(和主类的@EnableDubbo的作用相同)  
 ```
-## 第2种方式
+## 第2种方式(基于xml的ImportResource导入方式)
 ##### 1、保留dubbo.xml配置文件的方式(里面配置dubbo的基本信息)
 ##### 2、导入dubbo-starter
 ##### 3、在主启动类引入配置文件@ImportResource
- 提供者
-    
+提供者
 ```java
     @SpringBootApplication
     @ImportResource(locations = "classpath:provider.xml")
@@ -222,7 +221,6 @@ dubbo:
         }
     }
 ```
-
-## 第3种方式
+## 第3种方式(基于注解api的方式)
 
 

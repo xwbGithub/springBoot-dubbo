@@ -3,6 +3,8 @@ server:
 dubbo:
   application:
     name: user-service-provider #服务名
+  #scan:
+    #base-packages: com.atguigu.gmail #包扫描(和主类的@EnableDubbo的作用相同)
   registry:
     address: 127.0.0.1:2181 #注册中心地址
     protocol: zookeeper #注册中心
@@ -12,3 +14,4 @@ dubbo:
     port: 20881 #协议端口号
   # monitor:
     # protocol: registry #监控中心
+
