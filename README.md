@@ -99,8 +99,8 @@ java -Ddubbo.registry.check=false
 综上所述：
 
     <div>
-        <span style="color:red" color="red">精确优先</span>：<span>方法>接口>全局</span><br>
-        <span style="color:red" color="red">消费者设置优先</span>：如果级别一样,方法消费方>提供方
+        <span color="red">精确优先</span>：<span>方法>接口>全局</span><br>
+        <span color="red">消费者设置优先</span>：如果级别一样,方法消费方>提供方
     </div>
 
 
