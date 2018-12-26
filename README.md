@@ -104,3 +104,69 @@ java -Ddubbo.registry.check=false
 
 [其官网介绍如下](http://dubbo.apache.org/zh-cn/docs/user/configuration/xml.html)
 <br>
+### 重试次数 ###
+ retries="2"  <br>
+ 失败自动切换，当出现失败，重试其它服务器 [1]。通常用于读操作，但重试会带来更长延迟。可通过 retries="2" 来设置重试次数(不含第一次)。<br>
+ 重试次数配置如下：
+```xml
+ <dubbo:service retries="2" />
+ ```
+ 或者
+ ```xml
+  <dubbo:reference retries="2" />
+  ```
+  或者  
+  ```xml
+   <dubbo:reference>
+       <dubbo:method name="findFoo" retries="2" />
+   </dubbo:reference>
+   ```
+ ## 多版本 ##
+ 
+ 当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。
+ 
+ 可以按照以下的步骤进行版本迁移：
+ 
+ - 在低压力时间段，先升级一半提供者为新版本
+ - 再将所有消费者升级为新版本
+ - 然后将剩下的一半提供者升级为新版本
+ 
+ 老版本服务 **提供者** 配置：
+ ```java
+ @com.alibaba.dubbo.config.annotation.Service(version = "1.0.0") //暴露服务
+ @Component
+ public class UserServiceImpl1 implements UserService {
+ }
+ ```
+ 新版本**提供者** 配置：
+ ```java
+ @com.alibaba.dubbo.config.annotation.Service(version = "2.0.0") //暴露服务
+ @Component
+ public class UserServiceImpl2 implements UserService {
+    }
+  ```
+  服务**消费者**选择版本调用
+  
+  调用指定版本
+ ```java  
+  @Service
+  public class UserServiceImpl implements OrderService {
+      @Reference(version="1.0.0") 
+      private UserService userService;
+```
+  或者任意匹配
+```java  
+    @Service
+    public class UserServiceImpl implements OrderService {
+        @Reference(version="*")
+        private UserService userService;
+```
+
+注意:本人在测试调用多版本的过程中使用以下配置(消费者端的配置)启动服务报错,没有试出来
+```yml
+dubbo:
+  application:
+    name: order-service-consumer #服务名称
+  consumer:
+    version: *  #匹配任意的版本进行调用
+```
