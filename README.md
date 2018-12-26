@@ -98,10 +98,12 @@ java -Ddubbo.registry.check=false
 
 综上所述：
 
+``html
     <div>
         <span style="color:red">精确优先</span>：<span>方法>接口>全局</span><br>
         <span style="color:red">消费者设置优先</span>：如果级别一样,方法消费方>提供方
     </div>
+``
 
 [其官网介绍如下](http://dubbo.apache.org/zh-cn/docs/user/configuration/xml.html)
 <br>
