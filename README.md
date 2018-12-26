@@ -170,3 +170,49 @@ dubbo:
   consumer:
     version: *  #匹配任意的版本进行调用
 ```
+
+#springBoot与Dubbo的三种连接方式 #
+
+##第1种方式
+#####1、导入dubbo-starter
+#####2、在application.properties中配置dubbo的属性
+######  2.1、使用@Service[暴露服务 是dubbo的jar包注解]
+######  2.2、使用@Reference[引用服务 是dubbo的jar包注解]
+#####3、在主启动类添加@EnableDubbo注解
+    作用：开启基于dubbo的注解功能(2中实现方式)
+    
+    3.1、直接在主启动类上添加注解
+     @SpringBootApplication
+     @EnableDubbo //开启基于dubbo的注解功能
+     public class BootOrderServiceConsumerApplication {
+         public static void main(String[] args) {
+             SpringApplication.run(BootOrderServiceConsumerApplication.class, args);
+         }
+     }
+     3.2、在application.properties中使用包扫描
+        dubbo.scan.base-packages=com.atguigu.gmail.service.impl #包扫描(和主类的@EnableDubbo的作用相同)  
+##第2种方式
+#####1、保留dubbo.xml配置文件的方式(里面配置dubbo的基本信息)
+#####2、导入dubbo-starter
+#####3、在主启动类引入配置文件@ImportResource
+    提供者
+    @SpringBootApplication
+    @ImportResource(locations = "classpath:provider.xml")
+    public class BootUserServiceProviderApplication {
+        public static void main(String[] args) {
+            SpringApplication.run(BootUserServiceProviderApplication.class, args);
+        }
+    }
+    消费者
+    @SpringBootApplication
+    @ImportResource(locations = "classpath:consumer.xml")
+    public class BootOrderServiceConsumerApplication {
+        public static void main(String[] args) {
+            SpringApplication.run(BootOrderServiceConsumerApplication.class, args);
+        }
+    }
+    
+
+##第3种方式
+
+
