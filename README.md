@@ -285,7 +285,7 @@ public class MyDubboConfig {
 ```
 
 然后在主启动类上添加注解@DubboComponentScan
-```ava
+```java
 @SpringBootApplication
 @DubboComponentScan(basePackages = "com.atguigu.gmail")
 public class BootUserServiceProviderApplication {
