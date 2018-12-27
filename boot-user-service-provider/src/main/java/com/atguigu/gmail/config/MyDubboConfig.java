@@ -3,9 +3,11 @@ package com.atguigu.gmail.config;
 import com.alibaba.dubbo.config.*;
 import com.atguigu.gmail.service.UserService;
 import com.atguigu.gmail.service.impl.UserServiceImpl;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,19 @@ import java.util.List;
  */
 @Configuration
 public class MyDubboConfig {
+    /**
+     * 服务器配置
+     *
+     * @return
+     */
+    @Bean
+    public ServerProperties serverProperties() {
+        ServerProperties serverProperties = new ServerProperties();
+        serverProperties.setPort(8080);
+        serverProperties.setConnectionTimeout(Duration.ofMillis(1000));
+        return serverProperties;
+    }
+
     /**
      * 相当于此bean替代了dubbo.application.* 标签
      *
