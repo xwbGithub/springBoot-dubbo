@@ -294,3 +294,26 @@ public class BootUserServiceProviderApplication {
     }
 }
 ```
+#高可用
+
+##duobbo直连
+现象：zookeeper注册中心宕机，还可以消费dubbo暴露的服务
+~~~java
+@Service
+public class UserServiceImpl implements OrderService {
+    @Reference(url = "127.0.0.1:20881")
+    private UserService userService;
+    //...
+    }
+~~~
+## loadBalance
+[负载均衡](http://dubbo.apache.org/zh-cn/docs/user/demos/loadbalance.html)
+客户端,服务端,都可配置此属性
+```java
+@Service
+public class UserServiceImpl implements OrderService {
+    @Reference(loadbalance = "roundrobin")//负载均衡机制
+    private UserService userService;
+}
+```
+##服务降级

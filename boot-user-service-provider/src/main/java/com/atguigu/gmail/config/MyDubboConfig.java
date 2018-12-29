@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * dubbo配置文件
  */
-@Configuration
+//@Configuration
 public class MyDubboConfig {
     /**
      * 服务器配置

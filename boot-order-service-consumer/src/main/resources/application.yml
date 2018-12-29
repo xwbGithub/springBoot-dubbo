@@ -10,10 +10,14 @@ dubbo:
     address:  127.0.0.1:2181 #地址
     protocol: zookeeper #注册中心
     check: false #启动时是否检查注册中心有
+  protocol:
+    port: 20881
+    name: dubbo
   # monitor: #监控中心
     # address: registry
   consumer:
     check: false #当前所有的服务启动时都不检查(如果是true的话启动的时候会检查每一个是否在zk中存在，不存在则报错)
-    timeout: 1000 #客户端调用服务端的超时配置(单位/毫秒)
+    timeout: 10000 #客户端调用服务端的超时配置(单位/毫秒)
     retries: 3 #重试次数(在调用失败的情况下,重新调用该服务,不含第一次重试3次)
     # version: *  #匹配任意的版本进行调用
+
