@@ -294,9 +294,10 @@ public class BootUserServiceProviderApplication {
     }
 }
 ```
+
 #高可用
 
-##duobbo直连
+## duobbo直连
 现象：zookeeper注册中心宕机，还可以消费dubbo暴露的服务
 ~~~java
 @Service
@@ -316,7 +317,7 @@ public class UserServiceImpl implements OrderService {
     private UserService userService;
 }
 ```
-##服务容错
+## 服务容错
 **服务端配置**
 
 添加依赖
@@ -389,7 +390,7 @@ public class UserServiceImpl implements OrderService {
     }
 }
 ```
-#dubbo原理
+# dubbo原理
 <div>
     <p align="center">
         <img src="https://images2015.cnblogs.com/blog/522490/201510/522490-20151003120412386-363334260.png" width="615" height="367"/>
