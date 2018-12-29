@@ -407,3 +407,16 @@ RPC调用原理如图：<br>
 * 7 server stub将返回结果打包成消息并发送至消费方；<br>
 * 8 client stub接收到消息，并进行解码；<br>
 * 9 服务消费方得到最终结果。<br>
+### 1、dubbo原理-框架设计
+[官网地址](http://dubbo.apache.org/docs/zh-cn/dev/sources/images/dubbo-framework.jpg)
+<div>
+    <p align="center">
+        <img src="http://dubbo.apache.org/docs/zh-cn/dev/sources/images/dubbo-framework.jpg" width="615" height="367"/>
+        <br>
+</div><br>
+
+### 2、dubbo原理-启动解析、加载配置信息
+
+### 3、dubbo原理-服务暴露
+### 4、dubbo原理-服务引用
+### 5、dubbo原理-服务调用
