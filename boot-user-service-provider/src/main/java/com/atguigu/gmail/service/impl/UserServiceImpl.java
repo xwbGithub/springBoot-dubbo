@@ -5,12 +5,13 @@ import java.util.List;
 
 import com.atguigu.gmail.bean.UserAddress;
 import com.atguigu.gmail.service.UserService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.stereotype.Component;
 
 @com.alibaba.dubbo.config.annotation.Service //暴露服务
 @Component
 public class UserServiceImpl implements UserService {
-
+    @HystrixCommand
     @Override
     public List<UserAddress> getUserAddressList(String userId) {
         System.out.println("UserServiceImpl..");

@@ -316,4 +316,93 @@ public class UserServiceImpl implements OrderService {
     private UserService userService;
 }
 ```
-##服务降级
+##服务容错
+**服务端配置**
+
+添加依赖
+```xml
+ <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <version>1.4.4.RELEASE</version>
+        </dependency>
+```
+添加注解@EnableHystrix
+```java
+@SpringBootApplication
+@EnableDubbo /*开启基于注解的dubbo功能*/
+@EnableHystrix //开启容错
+public class BootUserServiceProviderApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(BootUserServiceProviderApplication.class, args);
+    }
+}
+```
+在可能会出现的方法上面添加注解@HystrixCommand
+```java
+@com.alibaba.dubbo.config.annotation.Service //暴露服务
+@Component
+public class UserServiceImpl implements UserService {
+    @HystrixCommand
+    @Override
+    public List<UserAddress> getUserAddressList(String userId) {
+        //......
+        return null;
+    }
+}
+```
+**客户端配置**
+主类添加注解
+```java
+@SpringBootApplication
+@EnableDubbo //开启基于dubbo的注解功能
+@EnableHystrix
+public class BootOrderServiceConsumerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(BootOrderServiceConsumerApplication.class, args);
+    }
+}
+```
+方法上面添加容错机制
+```java
+@Service
+public class UserServiceImpl implements OrderService {
+    @Reference(loadbalance = "roundrobin")//负载均衡机制
+    private UserService userService;
+    @Override
+    @HystrixCommand
+    public List<UserAddress> initOrder(String userId) {
+        System.out.println("用户id" + userId);
+        return userService.getUserAddressList(userId);
+    }
+    //容错方法
+    public List<UserAddress> exceptionMethod() {
+        List<UserAddress> arrayList = new ArrayList<>();
+        UserAddress userAddress = new UserAddress();
+        userAddress.setId(10);
+        userAddress.setPhoneNum("123456");
+        userAddress.setUserAddress("上海市");
+        arrayList.add(userAddress);
+        userAddress.setConsignee("测试");
+        userAddress.setIsDefault("Y");
+        return arrayList;
+    }
+}
+```
+#dubbo原理
+<div>
+    <p align="center">
+        <img src="https://images2015.cnblogs.com/blog/522490/201510/522490-20151003120412386-363334260.png" width="615" height="367"/>
+        <br>
+</div><br>
+
+RPC调用原理如图：<br>
+* 1 服务消费方（client）调用以本地调用方式调用服务；<br>
+* 2 client stub接收到调用后负责将方法、参数等组装成能够进行网络传输的消息体；<br>
+* 3 client stub找到服务地址，并将消息发送到服务端；<br>
+* 4 server stub收到消息后进行解码；<br>
+* 5 server stub根据解码结果调用本地的服务；<br>
+* 6 本地服务执行并将结果返回给server stub；<br>
+* 7 server stub将返回结果打包成消息并发送至消费方；<br>
+* 8 client stub接收到消息，并进行解码；<br>
+* 9 服务消费方得到最终结果。<br>
