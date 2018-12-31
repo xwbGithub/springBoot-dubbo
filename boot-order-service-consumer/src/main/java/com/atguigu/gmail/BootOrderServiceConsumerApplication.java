@@ -7,8 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
 @SpringBootApplication
-@EnableDubbo //开启基于dubbo的注解功能
+//@EnableDubbo //开启基于dubbo的注解功能
 @EnableHystrix
+@DubboComponentScan(basePackages = "com.atguigu.gmail")
 public class BootOrderServiceConsumerApplication {
     public static void main(String[] args) {
         SpringApplication.run(BootOrderServiceConsumerApplication.class, args);
